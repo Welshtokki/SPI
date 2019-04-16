@@ -3,29 +3,171 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SPI</title>
+    <title>SPI Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/jquery-3.4.0.min.js"></script>
     <script src="js/CryptoJS/rollups/aes.js"></script>
 
 <script>
 
-window.onload = function() {
+$(document).ready( function(){
+		
+		$('#key').bind("keyup input", function(){
+			
+			var value = $(this).val();		
+			
+			if(value.length > 0) {
+				$('#submit').removeAttr("disabled");
+				$(this).css("color", "green");
+			} else {
+				$('#submit').attr("disabled", "true");
+				$(this).css("color", "red");
+			}
+			
+		});
 
-    var app = new Vue({
-        el: '#app',
-        data : {
-            message : 'Hello 1st SPI Project !'
-        }
-    })
+        $("#btnEncryption").click(function(){
+           
+            var src = $("#src").val();
+            var key = $("#key").val();
 
-}
+            var encrypt = CryptoJS.AES.encrypt(src, key);
+
+            console.log("src : " + src + "key : ", key);
+            console.dir(encrypt);
+            $("#dst").val(encrypt);
+
+        });
+
+
+		$("#btnDecryption").click(function(){
+            var src = $("#src").val();
+            var key = $("#key").val(); 
+
+            var decrypted = CryptoJS.AES.decrypt(src, key);
+            var text = decrypted.toString(CryptoJS.enc.Utf8);
+
+            $("#dst").val(text);
+        });
+});
 </script>
+
+
+<style type="text/css">
+ 
+    html, body { width:100%; height:100% }
+     
+    .container {
+         width      : 90%;
+         height     : 90%;
+         margin     : 40px auto;
+     }
+     
+    .outer {
+        display : table;
+        width   : 100%;
+        height  : 100%;
+    }
+    
+    .inner {
+        display : table-cell;
+        vertical-align : top;
+        text-align : center;
+    }
+    
+    .centered {
+        position : relative;
+        display : inline-block;
+        
+        width : 100%;	
+        /* background : orange; */
+        background : linear-gradient(to right, rgba(30, 75, 115, 0.4), rgba(30, 75, 115, 0.6), rgba(30, 75, 115, 0.9), rgba(30, 75, 115, 0.6), rgba(30, 75, 115, 0.4));
+        color : white;
+    }
+     
+     
+    .TextHeader {
+        margin : 50px;
+        font-size: 100px;
+        font-weight : bold;
+    }
+    
+    .Notice {
+        height : auto;
+        padding : 10px 0px;
+        
+        font-size : 40px;
+    }
+     
+     div {
+     font-family : 'Quicksand','Helvetica Neue',Arial, sans-serif;
+     }
+     
+     input#key {
+     
+         width : 90%;
+         height : 100px;
+     
+         font-size: 80px;
+         text-align : center;
+         border-radius: 15px;
+     }
+
+     input#src {
+         width : 90%;
+         height : 100px;
+     
+         font-size: 50px;
+         text-align : center;
+         border-radius: 15px;
+         margin-left: 4.5%;
+         margin-right: 4.5%;
+     }
+
+     input#dst {
+         width : 90%;
+         height : 100px;
+     
+         font-size: 50px;
+         text-align : center;
+         border-radius: 15px;
+         margin-left: 4.5%;
+         margin-right: 4.5%;
+     }
+
+     button {
+         width : 40%;
+         height : 100px;
+     
+         font-size: 80px;
+         text-align : center;
+         border-radius: 15px;
+         margin-left: 4.5%;
+         margin-right: 4.5%;
+     }
+     
+</style>
+
 
 </head>
 <body>
-    <div id="app">
-        {{ message }}
-    </div>
+    <div class="container">
+        <div class="outer">
+            <div class="inner">
+                <div class="centered">
+                    
+                  <div class="TextHeader">SPI Project</div>
+                  
+                    <p> <input id="key" type="text" name="encryptionKey" placeholder="Encryption Key"> </p>
+                    <p> <button id="btnEncryption">Encryption</button> <button id="btnDecryption">Decryption</button> </p>
+                
+                
+                    <p> <input id="src" type="text" placeholder="SRC"> </p>
+                    <p> <input id="dst" type="text" placeholder="DST"> </p>
+
+              </div>
+          </div>
+      </div>
+  </div>
 </body>
 </html>
