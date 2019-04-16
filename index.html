@@ -1,30 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <title>SPI Project</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="js/jquery-3.4.0.min.js"></script>
+    
     <script src="js/CryptoJS/rollups/aes.js"></script>
-
+    <script src="js/jquery-3.4.0.min.js"></script>
+    
 <script>
 
 $(document).ready( function(){
-		
-		$('#key').bind("keyup input", function(){
-			
-			var value = $(this).val();		
-			
-			if(value.length > 0) {
-				$('#submit').removeAttr("disabled");
-				$(this).css("color", "green");
-			} else {
-				$('#submit').attr("disabled", "true");
-				$(this).css("color", "red");
-			}
-			
-		});
 
         $("#btnEncryption").click(function(){
            
@@ -33,8 +18,6 @@ $(document).ready( function(){
 
             var encrypt = CryptoJS.AES.encrypt(src, key);
 
-            console.log("src : " + src + "key : ", key);
-            console.dir(encrypt);
             $("#dst").val(encrypt);
 
         });
@@ -55,7 +38,7 @@ $(document).ready( function(){
 
 <style type="text/css">
  
-    html, body { width:100%; height:100% }
+    html, body { width:100%; height:100%; margin:0 }
      
     .container {
          width      : 90%;
@@ -79,9 +62,10 @@ $(document).ready( function(){
         position : relative;
         display : inline-block;
         
-        width : 100%;	
-        /* background : orange; */
+        width : 100%;
+        
         background : linear-gradient(to right, rgba(30, 75, 115, 0.4), rgba(30, 75, 115, 0.6), rgba(30, 75, 115, 0.9), rgba(30, 75, 115, 0.6), rgba(30, 75, 115, 0.4));
+        
         color : white;
     }
      
@@ -90,13 +74,6 @@ $(document).ready( function(){
         margin : 50px;
         font-size: 100px;
         font-weight : bold;
-    }
-    
-    .Notice {
-        height : auto;
-        padding : 10px 0px;
-        
-        font-size : 40px;
     }
      
      div {
@@ -148,8 +125,8 @@ $(document).ready( function(){
      
 </style>
 
-
 </head>
+
 <body>
     <div class="container">
         <div class="outer">
